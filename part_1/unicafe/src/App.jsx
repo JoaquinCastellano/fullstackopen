@@ -2,8 +2,18 @@ import { useState } from 'react'
 
 const Statistics = (props) => {
   
-  return (
+  if (props.feedback.all === 0) {
 
+    return (
+      <div>
+        <h1>statistics</h1>
+        <p>No feedback given</p>        
+      </div>
+    )
+
+  }
+
+  return (
     <div>
     
       <h1>statistics</h1>
@@ -16,7 +26,6 @@ const Statistics = (props) => {
       <p>positive {props.feedback.positive}</p>
     
     </div>
-    
   )
 }
 
@@ -91,7 +100,7 @@ const App = () => {
       <Statistics feedback={feedback} />      
       
     </div>
-    
+
   )
 
 }
