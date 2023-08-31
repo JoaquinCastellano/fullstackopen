@@ -15,7 +15,7 @@ const Statistics = (props) => {
 
         <h1>Statistics</h1>
         <p>No feedback given</p>        
-        
+
       </div>
     )
 
@@ -25,14 +25,20 @@ const Statistics = (props) => {
     <div>
     
       <h1>Statistics</h1>
+
+      <table>
+        <tbody>
     
-      <StatisticLine text="good" value = {props.feedback.good} />
-      <StatisticLine text="neutral" value = {props.feedback.neutral} />
-      <StatisticLine text="bad" value = {props.feedback.bad} />
-      <StatisticLine text="all" value = {props.feedback.all} />
-      <StatisticLine text="average" value = {props.feedback.average} />
-      <StatisticLine text="positive" value = {props.feedback.positive} />
-    
+          <StatisticLine text="good" value = {props.feedback.good} />
+          <StatisticLine text="neutral" value = {props.feedback.neutral} />
+          <StatisticLine text="bad" value = {props.feedback.bad} />
+          <StatisticLine text="all" value = {props.feedback.all} />
+          <StatisticLine text="average" value = {props.feedback.average} />
+          <StatisticLine text="positive" value = {props.feedback.positive} />
+
+        </tbody>
+      </table>
+
     </div>
   )
 }
@@ -41,7 +47,12 @@ const StatisticLine  = ({ text, value }) => {
 
   return (
 
-    <p>{text} {value}</p>
+    <tr>
+    
+      <td>{text}</td>
+      <td>{value}</td>
+      
+    </tr>
 
   )
 
@@ -64,8 +75,8 @@ const App = () => {
       ...feedback,      
       good: newGoodValue,
       all: newAllValue,
-      average: (newGoodValue - feedback.bad) / newAllValue,
-      positive: newGoodValue / newAllValue
+      average: ((newGoodValue - feedback.bad) / newAllValue).toFixed(2),
+      positive: (newGoodValue / newAllValue * 100).toFixed(2)
     }
 
     setFeedback(newFeedback)
@@ -81,8 +92,8 @@ const App = () => {
       ...feedback,
       neutral: newNeutralValue,
       all: newAllValue,
-      average: (feedback.good - feedback.bad) / newAllValue,
-      positive: feedback.good / newAllValue
+      average: ((feedback.good - feedback.bad) / newAllValue).toFixed(2),
+      positive: (feedback.good / newAllValue * 100 ).toFixed(2)
     }
 
     setFeedback(newFeedback)
@@ -98,8 +109,8 @@ const App = () => {
       ...feedback,
       bad: newBadValue,
       all: newAllValue,
-      average: (feedback.good - newBadValue) / newAllValue,
-      positive: feedback.good / newAllValue
+      average: ((feedback.good - newBadValue) / newAllValue).toFixed(2),
+      positive: (feedback.good / newAllValue * 100).toFixed(2)
     }
 
     setFeedback(newFeedback)
