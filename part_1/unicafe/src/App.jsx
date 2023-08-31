@@ -1,5 +1,25 @@
 import { useState } from 'react'
 
+const Statistics = (props) => {
+  
+  return (
+
+    <div>
+    
+      <h1>statistics</h1>
+    
+      <p>good {props.feedback.good}</p>    
+      <p>neutral {props.feedback.neutral}</p>
+      <p>bad {props.feedback.bad}</p>
+      <p>all {props.feedback.all}</p>
+      <p>average {props.feedback.average}</p>
+      <p>positive {props.feedback.positive}</p>
+    
+    </div>
+    
+  )
+}
+
 const App = () => {
 
   const [feedback, setFeedback] = useState({
@@ -60,24 +80,18 @@ const App = () => {
   }
   
   return (
-    
+
     <div>
       <h1>give feedback</h1>
 
       <button onClick={handleGoodFeedback}>good</button>
       <button onClick={handleNeutralFeedback}>neutral</button>
-      <button onClick={handleBadFeedback}>bad</button>
+      <button onClick={handleBadFeedback}>bad</button>      
 
-      <h1>statistics</h1>
-
-      <p>good {feedback.good}</p>
-      <p>neutral {feedback.neutral}</p>
-      <p>bad {feedback.bad}</p>
-      <p>all {feedback.all}</p>
-      <p>average {feedback.average}</p>
-      <p>positive {feedback.positive}</p>
+      <Statistics feedback={feedback} />      
       
     </div>
+    
   )
 
 }
