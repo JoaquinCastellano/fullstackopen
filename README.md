@@ -13,3 +13,8 @@
     - 0.5 ) [Single page app diagram](/part_0/5_single_page_app)
     - 0.6 ) [New note in Single page app diagram](/part_0/6_new_note_in_single_page_app) 
 
+- 1 ) [Introduction to React](/part_1)
+    - 1.5 ) [Course information](/part_1/courseinfo)
+    - 1.11 ) [Unicafe](/part_1/unicafe)
+    - 1.14 ) [Anecdotes](/part_1/anecdotes)
+
