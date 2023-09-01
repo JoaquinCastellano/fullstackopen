@@ -31,9 +31,10 @@ const App = () => {
   }
 
   return (
-    
+
     <div>
       <p>{anecdotes[selected]}</p>
+      <p>has {votesArr[selected]} votes</p>
       <button onClick={handleVoteButton}>vote</button>
       <button onClick={handleNextButton}>next anecdote</button>
     </div>
