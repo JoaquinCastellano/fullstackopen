@@ -1,5 +1,34 @@
 import { useState } from 'react'
 
+const MostVotedAnecdote = (props) => {
+
+  if (props.votesArr.reduce((pre,curr)=>pre+curr,0) === 0) {
+
+    return (
+      <div>
+
+        <h1>Anecdote with most votes</h1>
+        <p>No anecdote has been voted yet</p>        
+
+      </div>
+    )
+
+  }
+
+  let max_arr_index = props.votesArr.indexOf(Math.max(...props.votesArr))
+
+  return (
+    <div>
+
+      <h1>Anecdote with most votes</h1>
+      <p>{props.anecdotes[max_arr_index]}</p>
+      <p>has {props.votesArr[max_arr_index]} votes</p>        
+
+    </div>
+  )
+
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -33,10 +62,12 @@ const App = () => {
   return (
 
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p>
       <p>has {votesArr[selected]} votes</p>
       <button onClick={handleVoteButton}>vote</button>
       <button onClick={handleNextButton}>next anecdote</button>
+      <MostVotedAnecdote votesArr={votesArr} anecdotes={anecdotes} />
     </div>
    
   )
