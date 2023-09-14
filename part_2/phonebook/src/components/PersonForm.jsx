@@ -1,5 +1,5 @@
-import axios from 'axios'
 
+import PersonService from '../services/persons'
 
 const PersonForm = ({newName, newNumber, setNewName, setNewNumber, persons, setPersons,setPersonsToShow}) => {
 
@@ -22,10 +22,11 @@ const PersonForm = ({newName, newNumber, setNewName, setNewNumber, persons, setP
           number: newNumber
         }
 
-        axios.post("http://192.168.27.251:3001/persons", personObject)
+        PersonService
+        .create(personObject)
         .then(returnedPerson => {
-          setPersons(persons.concat(returnedPerson.data))
-          setPersonsToShow(persons.concat(returnedPerson.data))
+          setPersons(persons.concat(returnedPerson))
+          setPersonsToShow(persons.concat(returnedPerson))
           setNewName('')
           setNewNumber('')
         })

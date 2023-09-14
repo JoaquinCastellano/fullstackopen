@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import PersonService from './services/persons'
 
 const App = () => {
 
@@ -13,13 +13,11 @@ const App = () => {
   const [persons, setPersons] = useState([]) 
 
   useEffect(() => {
-    console.log('effect')
-    axios
-      .get('http://192.168.27.251:3001/persons')
-      .then(response => {
-        console.log('promise fulfilled')
-        setPersons(response.data)
-        setPersonsToShow(response.data)
+    PersonService
+      .getAll()
+        .then(initialPersons => {
+        setPersons(initialPersons)
+        setPersonsToShow(initialPersons)
       })
   }, [])
 
