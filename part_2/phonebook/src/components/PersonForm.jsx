@@ -1,3 +1,6 @@
+import axios from 'axios'
+
+
 const PersonForm = ({newName, newNumber, setNewName, setNewNumber, persons, setPersons,setPersonsToShow}) => {
 
     const handleNewName = (event) => {
@@ -18,12 +21,15 @@ const PersonForm = ({newName, newNumber, setNewName, setNewNumber, persons, setP
           name: newName,
           number: newNumber
         }
-      
-        setPersons(persons.concat(personObject))
-        setPersonsToShow(persons.concat(personObject))
-        setNewName('')
-        setNewNumber('')
-    
+
+        axios.post("http://192.168.27.251:3001/persons", personObject)
+        .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson.data))
+          setPersonsToShow(persons.concat(returnedPerson.data))
+          setNewName('')
+          setNewNumber('')
+        })
+              
       }
       
       const checkPerson = (event) => {
