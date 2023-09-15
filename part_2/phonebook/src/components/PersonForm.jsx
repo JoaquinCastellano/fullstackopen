@@ -1,7 +1,7 @@
 
 import PersonService from '../services/persons'
 
-const PersonForm = ({newName, newNumber, setNewName, setNewNumber, persons, setPersons,setPersonsToShow}) => {
+const PersonForm = ({newName, newNumber, setNewName, setNewNumber, persons, setPersons,setPersonsToShow,setNotification}) => {
 
     const handleNewName = (event) => {
 
@@ -27,21 +27,90 @@ const PersonForm = ({newName, newNumber, setNewName, setNewNumber, persons, setP
         .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
           setPersonsToShow(persons.concat(returnedPerson))
+
+          const notificationObject = {
+            type: "success",
+            message: "Added " + newName
+          }
+
+          setNotification(notificationObject);
           setNewName('')
           setNewNumber('')
+
+          setTimeout(() => {
+            setNotification({type : null, message : null})
+          }, 5000)
         })
               
       }
+
+      const updatePerson = (pid, obj) => {
+
+            PersonService
+            .update(pid,obj)
+            .then(returnedPerson => {
+
+              setPersons(persons.filter(p => p.id !== pid).concat(returnedPerson))
+              setPersonsToShow(persons.filter(p => p.id !== pid).concat(returnedPerson))
+    
+              const notificationObject = {
+                type: "warning",
+                message: "Modified " + newName
+              }
+    
+              setNotification(notificationObject);
+              setNewName('')
+              setNewNumber('')
+    
+              setTimeout(() => {
+                setNotification({type : null, message : null})
+              }, 5000)
+            })
+        
+    }
       
+
       const checkPerson = (event) => {
     
         event.preventDefault()
-        const checkPersonExists = obj => obj.name === newName;
     
-        newName.trim().length === 0 || newNumber.trim().length === 0 ? alert("Please complete all fields") : persons.some(checkPersonExists) ? 
-                                                                                      alert(newName + " is already added to phonebook") : addPerson(event)      
+        if(newName.trim().length === 0 || newNumber.trim().length === 0){
+
+          alert("Please complete all fields")
+
+        } else {
+          
+          const resultArrayA = persons.filter(p => p.name === newName)
+
+          if(resultArrayA.length === 0){
+
+            addPerson()
+
+          } else {
+          
+            const resultArrayB = persons.filter(p => p.name === newName & p.number === newNumber)
+
+            if(resultArrayB.length === 0){
+
+              if (window.confirm( newName  + " already exist. Update ?")) {
+
+                updatePerson(resultArrayA[0].id, {name:newName, number:newNumber} )
+
+              }
+
+
+            } else {
+
+              alert(newName + " already exists")
+
+            }            
+
+          }
+
+        }
+          
       }
-    
+      
     
     return (
     <form onSubmit={checkPerson}>
