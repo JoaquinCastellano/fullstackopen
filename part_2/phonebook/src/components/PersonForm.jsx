@@ -65,6 +65,28 @@ const PersonForm = ({newName, newNumber, setNewName, setNewNumber, persons, setP
               setTimeout(() => {
                 setNotification({type : null, message : null})
               }, 5000)
+            }).catch(error => {
+
+              if(error.response.status == 404 ){
+
+                setPersons(persons.filter(p => p.id !== pid))
+                setPersonsToShow(persons.filter(p => p.id !== pid))
+      
+                const notificationObject = {
+                  type: "error",
+                  message: "Information of " + newName + " has already benn removed from server"
+                }
+      
+                setNotification(notificationObject);
+                setNewName('')
+                setNewNumber('')
+      
+                setTimeout(() => {
+                  setNotification({type : null, message : null})
+                }, 5000)
+
+              }
+
             })
         
     }
