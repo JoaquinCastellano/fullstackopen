@@ -23,7 +23,7 @@ const Filter = ({newFilter, setNewFilter, persons, personsToShow, setPersonsToSh
       }
     
     return (
-        <div>
+      <div>
         filter shown with<input value={newFilter} onChange={handleNewFilter}/>
       </div>
     )
