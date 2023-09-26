@@ -1,4 +1,4 @@
-const Country = ({countriesToShow}) => {
+const Country = ({countriesToShow,setCountriesToShow}) => {
 
     let x = countriesToShow.length
 
@@ -15,7 +15,7 @@ const Country = ({countriesToShow}) => {
   
                 return (
 
-                    <p key={country.name.common} > {country.name.common} </p>
+                    <p key={country.name.common} > {country.name.common} <button onClick={() => setCountriesToShow([country])}>show</button> </p>
                 )                
             
             })  

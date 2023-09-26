@@ -32,7 +32,7 @@ function App() {
     <div>
 
     <Filter newFilter={newFilter} setNewFilter={setNewFilter} countries={countries} setCountriesToShow={setCountriesToShow} />
-    <Country countriesToShow={countriesToShow} />
+    <Country countriesToShow={countriesToShow} setCountriesToShow={setCountriesToShow} />
 
     </div>
   )
